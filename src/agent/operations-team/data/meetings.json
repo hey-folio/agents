@@ -1,0 +1,223 @@
+[
+  {
+    "id": "mtg-001",
+    "title": "TechStart Brand Review - Round 2",
+    "description": "Present refined logo concepts and color palette options",
+    "type": "client",
+    "attendees": [
+      { "id": "emp-001", "name": "Sarah Chen", "email": "sarah.chen@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "emp-003", "name": "Emily Rodriguez", "email": "emily.rodriguez@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "ext-001", "name": "Tom Richards", "email": "tom@techstart.io", "role": "required", "responseStatus": "accepted" },
+      { "id": "ext-002", "name": "Maria Santos", "email": "maria@techstart.io", "role": "optional", "responseStatus": "tentative" }
+    ],
+    "startTime": "2024-11-29T14:00:00Z",
+    "endTime": "2024-11-29T15:30:00Z",
+    "location": "TechStart HQ - Conference Room A",
+    "agenda": "1. Review refined logo concepts\\n2. Present color palette options\\n3. Discuss typography direction\\n4. Next steps and timeline",
+    "status": "scheduled",
+    "projectId": "proj-001",
+    "projectName": "TechStart Brand Refresh",
+    "createdBy": "emp-001",
+    "createdByName": "Sarah Chen",
+    "createdAt": "2024-11-20T10:00:00Z",
+    "updatedAt": "2024-11-20T10:00:00Z"
+  },
+  {
+    "id": "mtg-002",
+    "title": "GreenLife Sprint Planning",
+    "description": "Plan sprint 3 development tasks and priorities",
+    "type": "internal",
+    "attendees": [
+      { "id": "emp-002", "name": "Marcus Johnson", "email": "marcus.johnson@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "emp-004", "name": "James Wilson", "email": "james.wilson@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-008", "name": "Michael Brown", "email": "michael.brown@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-010", "name": "Robert Taylor", "email": "robert.taylor@designagency.com", "role": "required", "responseStatus": "accepted" }
+    ],
+    "startTime": "2024-11-28T10:00:00Z",
+    "endTime": "2024-11-28T11:00:00Z",
+    "meetingLink": "https://meet.designagency.com/greenlife-sprint",
+    "status": "scheduled",
+    "projectId": "proj-002",
+    "projectName": "GreenLife E-commerce Platform",
+    "createdBy": "emp-002",
+    "createdByName": "Marcus Johnson",
+    "createdAt": "2024-11-22T09:00:00Z",
+    "updatedAt": "2024-11-22T09:00:00Z"
+  },
+  {
+    "id": "mtg-003",
+    "title": "Weekly Design Team Standup",
+    "description": "Weekly sync on ongoing design projects and blockers",
+    "type": "internal",
+    "attendees": [
+      { "id": "emp-001", "name": "Sarah Chen", "email": "sarah.chen@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "emp-003", "name": "Emily Rodriguez", "email": "emily.rodriguez@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-006", "name": "David Kim", "email": "david.kim@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-010", "name": "Robert Taylor", "email": "robert.taylor@designagency.com", "role": "required", "responseStatus": "accepted" }
+    ],
+    "startTime": "2024-11-27T09:00:00Z",
+    "endTime": "2024-11-27T09:30:00Z",
+    "meetingLink": "https://meet.designagency.com/design-standup",
+    "status": "scheduled",
+    "createdBy": "emp-001",
+    "createdByName": "Sarah Chen",
+    "createdAt": "2024-11-01T08:00:00Z",
+    "updatedAt": "2024-11-01T08:00:00Z"
+  },
+  {
+    "id": "mtg-004",
+    "title": "FinanceHub Stakeholder Workshop",
+    "description": "Discovery workshop to align on product vision and user needs",
+    "type": "client",
+    "attendees": [
+      { "id": "emp-001", "name": "Sarah Chen", "email": "sarah.chen@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "emp-006", "name": "David Kim", "email": "david.kim@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-005", "name": "Aisha Patel", "email": "aisha.patel@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "ext-003", "name": "Kevin Zhang", "email": "kzhang@financehub.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "ext-004", "name": "Rachel Adams", "email": "radams@financehub.com", "role": "required", "responseStatus": "accepted" }
+    ],
+    "startTime": "2024-12-02T13:00:00Z",
+    "endTime": "2024-12-02T16:00:00Z",
+    "location": "Design Agency - Workshop Room",
+    "agenda": "1. Company vision and goals\\n2. Target user discussion\\n3. Feature prioritization exercise\\n4. Competitive landscape review",
+    "status": "scheduled",
+    "projectId": "proj-003",
+    "projectName": "FinanceHub Mobile App",
+    "createdBy": "emp-005",
+    "createdByName": "Aisha Patel",
+    "createdAt": "2024-11-18T14:00:00Z",
+    "updatedAt": "2024-11-18T14:00:00Z"
+  },
+  {
+    "id": "mtg-005",
+    "title": "GreenLife Product Demo",
+    "description": "Demo of MVP features to client stakeholders",
+    "type": "client",
+    "attendees": [
+      { "id": "emp-002", "name": "Marcus Johnson", "email": "marcus.johnson@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "emp-004", "name": "James Wilson", "email": "james.wilson@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "ext-005", "name": "Jessica Lee", "email": "jlee@greenlife.co", "role": "required", "responseStatus": "accepted" },
+      { "id": "ext-006", "name": "Mark Thompson", "email": "mthompson@greenlife.co", "role": "required", "responseStatus": "pending" }
+    ],
+    "startTime": "2024-12-05T15:00:00Z",
+    "endTime": "2024-12-05T16:00:00Z",
+    "meetingLink": "https://meet.designagency.com/greenlife-demo",
+    "agenda": "1. Product listing demo\\n2. Search functionality\\n3. User account features\\n4. Q&A and feedback",
+    "status": "scheduled",
+    "projectId": "proj-002",
+    "projectName": "GreenLife E-commerce Platform",
+    "createdBy": "emp-002",
+    "createdByName": "Marcus Johnson",
+    "createdAt": "2024-11-25T11:00:00Z",
+    "updatedAt": "2024-11-25T11:00:00Z"
+  },
+  {
+    "id": "mtg-006",
+    "title": "Artisan Coffee Kickoff Call",
+    "description": "Initial project kickoff with new client",
+    "type": "client",
+    "attendees": [
+      { "id": "emp-002", "name": "Marcus Johnson", "email": "marcus.johnson@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "emp-010", "name": "Robert Taylor", "email": "robert.taylor@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-007", "name": "Lisa Thompson", "email": "lisa.thompson@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "ext-007", "name": "Carlos Rivera", "email": "carlos@artisancoffee.com", "role": "required", "responseStatus": "accepted" }
+    ],
+    "startTime": "2025-01-16T10:00:00Z",
+    "endTime": "2025-01-16T11:30:00Z",
+    "meetingLink": "https://meet.designagency.com/artisan-kickoff",
+    "agenda": "1. Introductions\\n2. Project scope review\\n3. Timeline discussion\\n4. Initial requirements gathering",
+    "status": "scheduled",
+    "projectId": "proj-004",
+    "projectName": "Artisan Coffee Website Redesign",
+    "createdBy": "emp-002",
+    "createdByName": "Marcus Johnson",
+    "createdAt": "2024-11-15T10:00:00Z",
+    "updatedAt": "2024-11-15T10:00:00Z"
+  },
+  {
+    "id": "mtg-007",
+    "title": "Paper supplier contract review",
+    "description": "Review and negotiate annual print materials contract",
+    "type": "supplier",
+    "attendees": [
+      { "id": "emp-009", "name": "Jennifer Martinez", "email": "jennifer.martinez@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "ext-008", "name": "David Wong", "email": "dwong@premiumpapers.com", "role": "required", "responseStatus": "accepted" }
+    ],
+    "startTime": "2024-11-30T11:00:00Z",
+    "endTime": "2024-11-30T12:00:00Z",
+    "location": "Design Agency - Meeting Room 2",
+    "status": "scheduled",
+    "createdBy": "emp-009",
+    "createdByName": "Jennifer Martinez",
+    "createdAt": "2024-11-20T16:00:00Z",
+    "updatedAt": "2024-11-20T16:00:00Z"
+  },
+  {
+    "id": "mtg-008",
+    "title": "UX Research Findings Presentation",
+    "description": "Present user research findings for FinanceHub project",
+    "type": "internal",
+    "attendees": [
+      { "id": "emp-006", "name": "David Kim", "email": "david.kim@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "emp-001", "name": "Sarah Chen", "email": "sarah.chen@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-003", "name": "Emily Rodriguez", "email": "emily.rodriguez@designagency.com", "role": "required", "responseStatus": "accepted" }
+    ],
+    "startTime": "2024-11-26T14:00:00Z",
+    "endTime": "2024-11-26T15:00:00Z",
+    "meetingLink": "https://meet.designagency.com/ux-research",
+    "status": "completed",
+    "projectId": "proj-003",
+    "projectName": "FinanceHub Mobile App",
+    "notes": "Key findings: Users prefer visual budgets over text-heavy interfaces. Mobile-first approach validated. Security concerns are top priority.",
+    "createdBy": "emp-006",
+    "createdByName": "David Kim",
+    "createdAt": "2024-11-19T09:00:00Z",
+    "updatedAt": "2024-11-26T15:30:00Z"
+  },
+  {
+    "id": "mtg-009",
+    "title": "Monthly All-Hands",
+    "description": "Company-wide monthly update meeting",
+    "type": "internal",
+    "attendees": [
+      { "id": "emp-001", "name": "Sarah Chen", "email": "sarah.chen@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "emp-002", "name": "Marcus Johnson", "email": "marcus.johnson@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-003", "name": "Emily Rodriguez", "email": "emily.rodriguez@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-004", "name": "James Wilson", "email": "james.wilson@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-005", "name": "Aisha Patel", "email": "aisha.patel@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-006", "name": "David Kim", "email": "david.kim@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-007", "name": "Lisa Thompson", "email": "lisa.thompson@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-008", "name": "Michael Brown", "email": "michael.brown@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-009", "name": "Jennifer Martinez", "email": "jennifer.martinez@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "emp-010", "name": "Robert Taylor", "email": "robert.taylor@designagency.com", "role": "required", "responseStatus": "accepted" }
+    ],
+    "startTime": "2024-12-06T16:00:00Z",
+    "endTime": "2024-12-06T17:00:00Z",
+    "meetingLink": "https://meet.designagency.com/all-hands",
+    "agenda": "1. Company updates\\n2. Project highlights\\n3. New business pipeline\\n4. Q&A",
+    "status": "scheduled",
+    "createdBy": "emp-001",
+    "createdByName": "Sarah Chen",
+    "createdAt": "2024-11-01T10:00:00Z",
+    "updatedAt": "2024-11-01T10:00:00Z"
+  },
+  {
+    "id": "mtg-010",
+    "title": "Junior Designer Interview",
+    "description": "Interview candidate for junior designer position",
+    "type": "interview",
+    "attendees": [
+      { "id": "emp-001", "name": "Sarah Chen", "email": "sarah.chen@designagency.com", "role": "organizer", "responseStatus": "accepted" },
+      { "id": "emp-003", "name": "Emily Rodriguez", "email": "emily.rodriguez@designagency.com", "role": "required", "responseStatus": "accepted" },
+      { "id": "ext-009", "name": "Alex Park", "email": "alexpark.design@email.com", "role": "required", "responseStatus": "accepted" }
+    ],
+    "startTime": "2024-12-03T11:00:00Z",
+    "endTime": "2024-12-03T12:00:00Z",
+    "meetingLink": "https://meet.designagency.com/interview-dec3",
+    "status": "scheduled",
+    "createdBy": "emp-001",
+    "createdByName": "Sarah Chen",
+    "createdAt": "2024-11-22T14:00:00Z",
+    "updatedAt": "2024-11-22T14:00:00Z"
+  }
+]

@@ -1,0 +1,332 @@
+[
+  {
+    "id": "pol-001",
+    "title": "Expense Reimbursement Policy",
+    "category": "expense",
+    "summary": "Guidelines for submitting and approving business expenses",
+    "sections": [
+      {
+        "id": "pol-001-s1",
+        "title": "Eligible Expenses",
+        "content": "The following categories of expenses are eligible for reimbursement: travel (flights, hotels, ground transportation), meals during business travel or client meetings, software and subscriptions required for work, office supplies, professional development (conferences, courses, certifications), and client entertainment. All expenses must be directly related to company business."
+      },
+      {
+        "id": "pol-001-s2",
+        "title": "Spending Limits",
+        "content": "The following spending limits apply without additional approval: Meals (individual): $50 per meal. Meals (team/client): $75 per person. Software subscriptions: $100/month. Office supplies: $100 per purchase. Professional development: $500 per event. Client entertainment: $150 per person. Expenses exceeding these limits require manager pre-approval."
+      },
+      {
+        "id": "pol-001-s3",
+        "title": "Submission Requirements",
+        "content": "All expense reports must be submitted within 30 days of the expense date. Required documentation includes: itemized receipts for all expenses over $25, business purpose description, project code (if applicable), and attendee names for meals and entertainment. Digital receipts are acceptable. Expenses without proper documentation may be denied."
+      },
+      {
+        "id": "pol-001-s4",
+        "title": "Approval Process",
+        "content": "Expenses under $500 are approved by direct managers. Expenses between $500-$2000 require department head approval. Expenses over $2000 require executive approval. Expense reports should be reviewed within 5 business days of submission. Approved expenses are reimbursed in the next payroll cycle."
+      }
+    ],
+    "effectiveDate": "2024-01-01",
+    "lastUpdated": "2024-06-15",
+    "version": "2.1",
+    "approvedBy": "Sarah Chen",
+    "keywords": ["expense", "reimbursement", "receipt", "spending", "limit", "approval", "meals", "travel", "software"]
+  },
+  {
+    "id": "pol-002",
+    "title": "Travel Policy",
+    "category": "travel",
+    "summary": "Guidelines for business travel arrangements and reimbursement",
+    "sections": [
+      {
+        "id": "pol-002-s1",
+        "title": "Booking Requirements",
+        "content": "All business travel must be booked at least 14 days in advance when possible to secure best rates. Flights should be economy class for trips under 6 hours; business class may be approved for longer flights. Hotel bookings should not exceed $250/night in most cities, or $350/night in high-cost cities (NYC, SF, London). Use preferred vendors when available."
+      },
+      {
+        "id": "pol-002-s2",
+        "title": "Ground Transportation",
+        "content": "Rental cars are approved for trips where public transportation is impractical. Compact or midsize vehicles should be selected unless traveling with multiple team members. Ride-sharing services (Uber, Lyft) are approved for airport transfers and local transportation. Keep all receipts and document business purpose."
+      },
+      {
+        "id": "pol-002-s3",
+        "title": "Travel Approval",
+        "content": "Domestic travel under $1500 total cost requires manager approval. Domestic travel over $1500 or any international travel requires department head approval. Travel requests should be submitted at least 2 weeks before the trip date. Include trip purpose, itinerary, and estimated costs."
+      },
+      {
+        "id": "pol-002-s4",
+        "title": "Per Diem Allowances",
+        "content": "Daily meal allowances during travel: Breakfast $20, Lunch $25, Dinner $45. These are maximum amounts; actual expenses will be reimbursed with receipts. Incidentals (tips, parking, etc.) up to $25/day do not require receipts. International per diem rates vary by location."
+      }
+    ],
+    "effectiveDate": "2024-01-01",
+    "lastUpdated": "2024-09-01",
+    "version": "3.0",
+    "approvedBy": "Jennifer Martinez",
+    "keywords": ["travel", "flight", "hotel", "booking", "per diem", "rental car", "transportation", "international"]
+  },
+  {
+    "id": "pol-003",
+    "title": "Time Off Policy",
+    "category": "time_off",
+    "summary": "Vacation, sick leave, and other time off guidelines",
+    "sections": [
+      {
+        "id": "pol-003-s1",
+        "title": "Paid Time Off (PTO)",
+        "content": "Full-time employees receive 20 days of PTO annually, accrued monthly. PTO can be used for vacation, personal days, or appointments. Unused PTO carries over up to 5 days maximum. PTO requests should be submitted at least 2 weeks in advance for planned time off."
+      },
+      {
+        "id": "pol-003-s2",
+        "title": "Sick Leave",
+        "content": "Employees receive 10 days of sick leave annually. Sick leave is for personal illness, medical appointments, or caring for immediate family members. For absences longer than 3 consecutive days, a doctor's note may be required. Unused sick leave does not carry over."
+      },
+      {
+        "id": "pol-003-s3",
+        "title": "Holidays",
+        "content": "The company observes 10 paid holidays per year: New Year's Day, MLK Day, Presidents Day, Memorial Day, Independence Day, Labor Day, Thanksgiving (2 days), Christmas Eve, and Christmas Day. When holidays fall on weekends, they are observed on the nearest weekday."
+      },
+      {
+        "id": "pol-003-s4",
+        "title": "Request Process",
+        "content": "Submit time off requests through the HR system. Managers should respond within 3 business days. During busy project periods, coordinate with your team to ensure coverage. Extended leaves (over 2 weeks) require 30 days advance notice and department head approval."
+      }
+    ],
+    "effectiveDate": "2024-01-01",
+    "lastUpdated": "2024-03-01",
+    "version": "1.5",
+    "approvedBy": "Jennifer Martinez",
+    "keywords": ["vacation", "PTO", "sick leave", "holiday", "time off", "absence", "leave"]
+  },
+  {
+    "id": "pol-004",
+    "title": "Remote Work Policy",
+    "category": "remote_work",
+    "summary": "Guidelines for working remotely and hybrid arrangements",
+    "sections": [
+      {
+        "id": "pol-004-s1",
+        "title": "Eligibility",
+        "content": "All employees are eligible for hybrid work arrangements after completing their 90-day onboarding period. Fully remote arrangements require manager and HR approval based on role requirements. Some positions may require regular in-office presence due to job duties."
+      },
+      {
+        "id": "pol-004-s2",
+        "title": "Work Schedule",
+        "content": "Core collaboration hours are 10 AM - 3 PM Pacific Time. Employees must be available during core hours regardless of location. Work schedules should be communicated to managers and reflected in calendar availability. Hybrid employees should be in-office at least 2 days per week."
+      },
+      {
+        "id": "pol-004-s3",
+        "title": "Home Office Setup",
+        "content": "The company provides a $500 one-time stipend for home office equipment. Employees must have reliable internet (minimum 25 Mbps) and a dedicated workspace. Equipment loans (monitors, keyboards) are available through IT. Regular equipment refresh stipends of $200/year are provided."
+      },
+      {
+        "id": "pol-004-s4",
+        "title": "Communication Expectations",
+        "content": "Remote employees must be responsive on Slack during working hours (response within 1 hour). Video should be enabled for team meetings and client calls. Daily standups are required for project teams. Update your status when stepping away for more than 30 minutes."
+      }
+    ],
+    "effectiveDate": "2023-07-01",
+    "lastUpdated": "2024-08-01",
+    "version": "2.0",
+    "approvedBy": "Sarah Chen",
+    "keywords": ["remote", "work from home", "hybrid", "home office", "flexible", "schedule", "stipend"]
+  },
+  {
+    "id": "pol-005",
+    "title": "Equipment and Asset Policy",
+    "category": "equipment",
+    "summary": "Guidelines for company equipment and asset management",
+    "sections": [
+      {
+        "id": "pol-005-s1",
+        "title": "Provided Equipment",
+        "content": "New employees receive a laptop (MacBook Pro or equivalent), external display, keyboard, and mouse. Designers receive additional hardware such as drawing tablets when required. All equipment remains company property and must be returned upon separation."
+      },
+      {
+        "id": "pol-005-s2",
+        "title": "Equipment Care",
+        "content": "Employees are responsible for reasonable care of company equipment. Report any damage or issues to IT within 24 hours. Do not attempt repairs yourself. Equipment should not be loaned to non-employees. Keep work devices secure when traveling."
+      },
+      {
+        "id": "pol-005-s3",
+        "title": "Software Requests",
+        "content": "Standard software suite is pre-installed on all devices. Additional software requests should be submitted through IT. Approved software will be licensed and installed by IT. Personal software should not be installed on company devices without approval."
+      },
+      {
+        "id": "pol-005-s4",
+        "title": "Equipment Upgrades",
+        "content": "Standard equipment refresh cycle is 3 years. Upgrade requests outside the refresh cycle require manager justification. Equipment can be purchased at depreciated value upon refresh. Return all accessories when equipment is upgraded."
+      }
+    ],
+    "effectiveDate": "2024-01-01",
+    "lastUpdated": "2024-05-01",
+    "version": "1.2",
+    "approvedBy": "Jennifer Martinez",
+    "keywords": ["equipment", "laptop", "hardware", "software", "asset", "IT", "computer", "device"]
+  },
+  {
+    "id": "pol-006",
+    "title": "Professional Conduct Policy",
+    "category": "conduct",
+    "summary": "Standards for professional behavior and workplace conduct",
+    "sections": [
+      {
+        "id": "pol-006-s1",
+        "title": "Professional Standards",
+        "content": "All employees are expected to maintain professional behavior in all work interactions. This includes in-person, virtual, and written communications. Treat colleagues, clients, and partners with respect. Discrimination, harassment, and bullying are strictly prohibited."
+      },
+      {
+        "id": "pol-006-s2",
+        "title": "Client Interactions",
+        "content": "Represent the company professionally in all client interactions. Maintain confidentiality of client information. Do not make commitments on behalf of the company without proper authorization. Report any client concerns to your manager promptly."
+      },
+      {
+        "id": "pol-006-s3",
+        "title": "Conflict of Interest",
+        "content": "Disclose any potential conflicts of interest to your manager and HR. Do not engage in outside work that competes with company business. Avoid personal relationships with clients that could impact professional judgment. Accept gifts from clients only under $50 value."
+      },
+      {
+        "id": "pol-006-s4",
+        "title": "Social Media",
+        "content": "Personal social media use should not interfere with work responsibilities. Do not share confidential company or client information. If identifying as a company employee, include a disclaimer that views are your own. Avoid negative comments about the company, clients, or colleagues."
+      }
+    ],
+    "effectiveDate": "2023-01-01",
+    "lastUpdated": "2024-02-15",
+    "version": "2.3",
+    "approvedBy": "Sarah Chen",
+    "keywords": ["conduct", "behavior", "professional", "harassment", "conflict", "social media", "client"]
+  },
+  {
+    "id": "pol-007",
+    "title": "Information Security Policy",
+    "category": "security",
+    "summary": "Guidelines for protecting company and client data",
+    "sections": [
+      {
+        "id": "pol-007-s1",
+        "title": "Password Requirements",
+        "content": "All passwords must be at least 12 characters with mixed case, numbers, and symbols. Enable two-factor authentication on all work accounts. Use a company-approved password manager. Never share passwords or write them down. Change passwords immediately if compromise is suspected."
+      },
+      {
+        "id": "pol-007-s2",
+        "title": "Data Handling",
+        "content": "Classify all data as Public, Internal, Confidential, or Restricted. Confidential and Restricted data must be encrypted at rest and in transit. Do not store sensitive data on personal devices. Use approved cloud storage only (Google Drive, Dropbox Business). Delete sensitive data when no longer needed."
+      },
+      {
+        "id": "pol-007-s3",
+        "title": "Physical Security",
+        "content": "Lock your computer when leaving your desk. Do not leave sensitive documents unattended. Shred physical documents containing confidential information. Report lost or stolen devices immediately to IT. Use privacy screens in public spaces."
+      },
+      {
+        "id": "pol-007-s4",
+        "title": "Incident Reporting",
+        "content": "Report any security incidents to IT immediately. This includes phishing attempts, suspicious emails, lost devices, or unauthorized access. Do not attempt to investigate incidents yourself. Preserve evidence by not modifying affected systems. Cooperation in incident investigations is required."
+      }
+    ],
+    "effectiveDate": "2024-01-01",
+    "lastUpdated": "2024-10-01",
+    "version": "3.1",
+    "approvedBy": "Jennifer Martinez",
+    "keywords": ["security", "password", "data", "confidential", "encryption", "phishing", "privacy"]
+  },
+  {
+    "id": "pol-008",
+    "title": "Benefits Overview",
+    "category": "benefits",
+    "summary": "Summary of employee benefits and enrollment information",
+    "sections": [
+      {
+        "id": "pol-008-s1",
+        "title": "Health Insurance",
+        "content": "The company offers medical, dental, and vision insurance. Coverage begins on the first day of employment. Employees may choose from PPO or HMO plans. Dependent coverage is available at additional cost. Annual open enrollment occurs in November."
+      },
+      {
+        "id": "pol-008-s2",
+        "title": "Retirement Benefits",
+        "content": "401(k) plan available after 90 days of employment. Company matches 50% of contributions up to 6% of salary. Vesting is immediate for employee contributions, 3-year schedule for company match. Investment options include target-date funds and self-directed options."
+      },
+      {
+        "id": "pol-008-s3",
+        "title": "Professional Development",
+        "content": "Annual professional development budget of $2,000 per employee. Covers conferences, courses, certifications, and training. Pre-approval required for expenses over $500. Unused budget does not carry over. Additional training may be approved based on business need."
+      },
+      {
+        "id": "pol-008-s4",
+        "title": "Additional Benefits",
+        "content": "Commuter benefits program for transit and parking. Cell phone stipend of $75/month for roles requiring mobile availability. Gym membership reimbursement up to $50/month. Employee assistance program for counseling and support services."
+      }
+    ],
+    "effectiveDate": "2024-01-01",
+    "lastUpdated": "2024-01-01",
+    "version": "2024.1",
+    "approvedBy": "Jennifer Martinez",
+    "keywords": ["benefits", "insurance", "health", "dental", "401k", "retirement", "development", "gym"]
+  },
+  {
+    "id": "pol-009",
+    "title": "Project and Client Confidentiality",
+    "category": "general",
+    "summary": "Guidelines for handling confidential project and client information",
+    "sections": [
+      {
+        "id": "pol-009-s1",
+        "title": "Client Confidentiality",
+        "content": "All client information is confidential by default. Do not discuss client projects with non-team members. Client names and project details should not be shared externally without permission. NDA requirements vary by client - check with your manager."
+      },
+      {
+        "id": "pol-009-s2",
+        "title": "Portfolio Usage",
+        "content": "Work may only be added to portfolios with client permission. Some clients require approval of specific images or descriptions. Wait until projects are publicly launched before sharing. Credit clients appropriately when permission is granted."
+      },
+      {
+        "id": "pol-009-s3",
+        "title": "File Storage",
+        "content": "Store all project files in designated project folders. Do not store client files on personal drives or devices. Archive completed projects within 30 days of completion. Follow naming conventions specified in the project handbook."
+      },
+      {
+        "id": "pol-009-s4",
+        "title": "External Communications",
+        "content": "Media inquiries should be directed to the marketing team. Do not discuss unannounced projects publicly. Social media posts about client work require approval. Case studies and testimonials need client sign-off."
+      }
+    ],
+    "effectiveDate": "2023-06-01",
+    "lastUpdated": "2024-04-15",
+    "version": "1.4",
+    "approvedBy": "Sarah Chen",
+    "keywords": ["confidential", "client", "NDA", "portfolio", "files", "media", "project"]
+  },
+  {
+    "id": "pol-010",
+    "title": "Timesheet and Billing Policy",
+    "category": "general",
+    "summary": "Guidelines for accurate time tracking and project billing",
+    "sections": [
+      {
+        "id": "pol-010-s1",
+        "title": "Time Tracking Requirements",
+        "content": "All employees must track time daily. Enter hours by project and task when applicable. Minimum tracking increment is 15 minutes. Submit timesheets by end of day Friday each week. Late submissions may delay payroll processing."
+      },
+      {
+        "id": "pol-010-s2",
+        "title": "Billable vs Non-Billable",
+        "content": "Billable hours are work directly for client projects. Non-billable includes internal meetings, admin, professional development, and bench time. Target billable utilization is 70% for individual contributors, 50% for managers. Discuss utilization concerns with your manager."
+      },
+      {
+        "id": "pol-010-s3",
+        "title": "Project Budgets",
+        "content": "Check project budget status before starting significant work. Flag projects approaching 80% budget consumption to your PM. Over-budget work requires client and management approval. Do not stop work without discussing with your manager first."
+      },
+      {
+        "id": "pol-010-s4",
+        "title": "Approval Process",
+        "content": "Managers review and approve timesheets weekly. Corrections must be submitted within 2 weeks of the original entry. Approved timesheets are used for client invoicing. Timesheet accuracy directly impacts project profitability and client relationships."
+      }
+    ],
+    "effectiveDate": "2024-01-01",
+    "lastUpdated": "2024-07-01",
+    "version": "2.0",
+    "approvedBy": "Marcus Johnson",
+    "keywords": ["timesheet", "billing", "hours", "utilization", "budget", "tracking", "project"]
+  }
+]

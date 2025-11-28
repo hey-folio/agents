@@ -1,0 +1,270 @@
+[
+  {
+    "id": "book-001",
+    "employeeId": "emp-004",
+    "employeeName": "James Wilson",
+    "type": "flight",
+    "status": "confirmed",
+    "flightDetails": {
+      "airline": "United Airlines",
+      "flightNumber": "UA 1234",
+      "departure": {
+        "airport": "SFO",
+        "city": "San Francisco",
+        "time": "2024-11-05T08:00:00Z"
+      },
+      "arrival": {
+        "airport": "JFK",
+        "city": "New York",
+        "time": "2024-11-05T16:30:00Z"
+      },
+      "class": "economy",
+      "duration": "5h 30m",
+      "stops": 0
+    },
+    "projectId": "proj-002",
+    "projectName": "GreenLife E-commerce Platform",
+    "totalCost": 425,
+    "confirmationNumber": "UA7X9K2M",
+    "bookedAt": "2024-10-28T10:00:00Z",
+    "createdAt": "2024-10-28T10:00:00Z",
+    "updatedAt": "2024-10-28T10:00:00Z"
+  },
+  {
+    "id": "book-002",
+    "employeeId": "emp-002",
+    "employeeName": "Marcus Johnson",
+    "type": "hotel",
+    "status": "confirmed",
+    "hotelDetails": {
+      "name": "The Manhattan Hotel",
+      "address": "123 Madison Ave",
+      "city": "New York",
+      "rating": 4,
+      "checkIn": "2024-11-01",
+      "checkOut": "2024-11-03",
+      "roomType": "Standard King",
+      "amenities": ["WiFi", "Gym", "Business Center", "Room Service"],
+      "imageUrl": "https://images.unsplash.com/photo-1566073771259-6a8506099945"
+    },
+    "projectId": "proj-002",
+    "projectName": "GreenLife E-commerce Platform",
+    "totalCost": 850,
+    "confirmationNumber": "MH2024110134",
+    "bookedAt": "2024-10-20T14:00:00Z",
+    "createdAt": "2024-10-20T14:00:00Z",
+    "updatedAt": "2024-10-20T14:00:00Z"
+  },
+  {
+    "id": "book-003",
+    "employeeId": "emp-006",
+    "employeeName": "David Kim",
+    "type": "flight",
+    "status": "confirmed",
+    "flightDetails": {
+      "airline": "Delta Airlines",
+      "flightNumber": "DL 892",
+      "departure": {
+        "airport": "SFO",
+        "city": "San Francisco",
+        "time": "2024-12-10T07:00:00Z"
+      },
+      "arrival": {
+        "airport": "ORD",
+        "city": "Chicago",
+        "time": "2024-12-10T13:15:00Z"
+      },
+      "class": "economy",
+      "duration": "4h 15m",
+      "stops": 0
+    },
+    "totalCost": 320,
+    "confirmationNumber": "DL4K8P2N",
+    "bookedAt": "2024-11-15T11:00:00Z",
+    "createdAt": "2024-11-15T11:00:00Z",
+    "updatedAt": "2024-11-15T11:00:00Z"
+  },
+  {
+    "id": "book-004",
+    "employeeId": "emp-006",
+    "employeeName": "David Kim",
+    "type": "hotel",
+    "status": "confirmed",
+    "hotelDetails": {
+      "name": "Chicago Downtown Marriott",
+      "address": "540 N Michigan Ave",
+      "city": "Chicago",
+      "rating": 4,
+      "checkIn": "2024-12-10",
+      "checkOut": "2024-12-12",
+      "roomType": "Deluxe Queen",
+      "amenities": ["WiFi", "Gym", "Restaurant", "Concierge"],
+      "imageUrl": "https://images.unsplash.com/photo-1564501049412-61c2a3083791"
+    },
+    "totalCost": 580,
+    "confirmationNumber": "MAR20241210DK",
+    "bookedAt": "2024-11-15T11:30:00Z",
+    "createdAt": "2024-11-15T11:30:00Z",
+    "updatedAt": "2024-11-15T11:30:00Z"
+  },
+  {
+    "id": "book-005",
+    "employeeId": "emp-001",
+    "employeeName": "Sarah Chen",
+    "type": "flight",
+    "status": "pending",
+    "flightDetails": {
+      "airline": "American Airlines",
+      "flightNumber": "AA 456",
+      "departure": {
+        "airport": "SFO",
+        "city": "San Francisco",
+        "time": "2024-12-15T09:00:00Z"
+      },
+      "arrival": {
+        "airport": "LAX",
+        "city": "Los Angeles",
+        "time": "2024-12-15T10:30:00Z"
+      },
+      "class": "business",
+      "duration": "1h 30m",
+      "stops": 0
+    },
+    "projectId": "proj-003",
+    "projectName": "FinanceHub Mobile App",
+    "totalCost": 520,
+    "bookedAt": "2024-11-25T09:00:00Z",
+    "createdAt": "2024-11-25T09:00:00Z",
+    "updatedAt": "2024-11-25T09:00:00Z"
+  },
+  {
+    "id": "book-006",
+    "employeeId": "emp-005",
+    "employeeName": "Aisha Patel",
+    "type": "car",
+    "status": "confirmed",
+    "carDetails": {
+      "company": "Enterprise",
+      "vehicleType": "midsize",
+      "model": "Toyota Camry",
+      "pickupLocation": "LAX Airport",
+      "dropoffLocation": "LAX Airport",
+      "pickupTime": "2024-12-02T10:00:00Z",
+      "dropoffTime": "2024-12-04T10:00:00Z",
+      "features": ["GPS", "Bluetooth", "Cruise Control"]
+    },
+    "projectId": "proj-003",
+    "projectName": "FinanceHub Mobile App",
+    "totalCost": 180,
+    "confirmationNumber": "ENT8834521",
+    "bookedAt": "2024-11-20T16:00:00Z",
+    "createdAt": "2024-11-20T16:00:00Z",
+    "updatedAt": "2024-11-20T16:00:00Z"
+  },
+  {
+    "id": "book-007",
+    "employeeId": "emp-002",
+    "employeeName": "Marcus Johnson",
+    "type": "flight",
+    "status": "cancelled",
+    "flightDetails": {
+      "airline": "JetBlue",
+      "flightNumber": "B6 789",
+      "departure": {
+        "airport": "SFO",
+        "city": "San Francisco",
+        "time": "2024-10-20T14:00:00Z"
+      },
+      "arrival": {
+        "airport": "BOS",
+        "city": "Boston",
+        "time": "2024-10-20T22:30:00Z"
+      },
+      "class": "economy",
+      "duration": "5h 30m",
+      "stops": 0
+    },
+    "totalCost": 380,
+    "confirmationNumber": "B6K2M9P4",
+    "bookedAt": "2024-10-01T09:00:00Z",
+    "createdAt": "2024-10-01T09:00:00Z",
+    "updatedAt": "2024-10-15T11:00:00Z"
+  },
+  {
+    "id": "book-008",
+    "employeeId": "emp-003",
+    "employeeName": "Emily Rodriguez",
+    "type": "hotel",
+    "status": "pending",
+    "hotelDetails": {
+      "name": "The Westin Palo Alto",
+      "address": "675 El Camino Real",
+      "city": "Palo Alto",
+      "rating": 4,
+      "checkIn": "2024-12-05",
+      "checkOut": "2024-12-06",
+      "roomType": "Traditional King",
+      "amenities": ["WiFi", "Gym", "Pool", "Spa"],
+      "imageUrl": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa"
+    },
+    "projectId": "proj-001",
+    "projectName": "TechStart Brand Refresh",
+    "totalCost": 290,
+    "bookedAt": "2024-11-26T10:00:00Z",
+    "createdAt": "2024-11-26T10:00:00Z",
+    "updatedAt": "2024-11-26T10:00:00Z"
+  },
+  {
+    "id": "book-009",
+    "employeeId": "emp-004",
+    "employeeName": "James Wilson",
+    "type": "flight",
+    "status": "confirmed",
+    "flightDetails": {
+      "airline": "United Airlines",
+      "flightNumber": "UA 5678",
+      "departure": {
+        "airport": "JFK",
+        "city": "New York",
+        "time": "2024-11-06T19:00:00Z"
+      },
+      "arrival": {
+        "airport": "SFO",
+        "city": "San Francisco",
+        "time": "2024-11-06T22:30:00Z"
+      },
+      "class": "economy",
+      "duration": "6h 30m",
+      "stops": 1
+    },
+    "projectId": "proj-002",
+    "projectName": "GreenLife E-commerce Platform",
+    "totalCost": 395,
+    "confirmationNumber": "UA3M7K9P",
+    "bookedAt": "2024-10-28T10:30:00Z",
+    "createdAt": "2024-10-28T10:30:00Z",
+    "updatedAt": "2024-10-28T10:30:00Z"
+  },
+  {
+    "id": "book-010",
+    "employeeId": "emp-007",
+    "employeeName": "Lisa Thompson",
+    "type": "car",
+    "status": "confirmed",
+    "carDetails": {
+      "company": "Hertz",
+      "vehicleType": "compact",
+      "model": "Honda Civic",
+      "pickupLocation": "Downtown San Francisco",
+      "dropoffLocation": "Downtown San Francisco",
+      "pickupTime": "2024-12-01T09:00:00Z",
+      "dropoffTime": "2024-12-01T18:00:00Z",
+      "features": ["GPS", "Bluetooth"]
+    },
+    "totalCost": 65,
+    "confirmationNumber": "HTZ9921034",
+    "bookedAt": "2024-11-22T14:00:00Z",
+    "createdAt": "2024-11-22T14:00:00Z",
+    "updatedAt": "2024-11-22T14:00:00Z"
+  }
+]

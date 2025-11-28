@@ -14,11 +14,10 @@ export const GenerativeUIAnnotation = Annotation.Root({
   context: Annotation<Record<string, unknown> | undefined>,
   timestamp: Annotation<number>,
   next: Annotation<
-    | "stockbroker"
-    | "tripPlanner"
-    | "openCode"
-    | "orderPizza"
-    | "writerAgent"
+    | "financeAgent"
+    | "operationsAgent"
+    | "projectsAgent"
+    | "policiesAgent"
     | "generalInput"
   >(),
 });

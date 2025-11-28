@@ -1,0 +1,92 @@
+[
+  {
+    "id": "emp-001",
+    "name": "Sarah Chen",
+    "email": "sarah.chen@designagency.com",
+    "role": "creative_director",
+    "department": "Creative",
+    "hireDate": "2020-03-15",
+    "managerId": null
+  },
+  {
+    "id": "emp-002",
+    "name": "Marcus Johnson",
+    "email": "marcus.johnson@designagency.com",
+    "role": "project_manager",
+    "department": "Operations",
+    "hireDate": "2021-06-01",
+    "managerId": "emp-001"
+  },
+  {
+    "id": "emp-003",
+    "name": "Emily Rodriguez",
+    "email": "emily.rodriguez@designagency.com",
+    "role": "designer",
+    "department": "Creative",
+    "hireDate": "2022-01-10",
+    "managerId": "emp-001"
+  },
+  {
+    "id": "emp-004",
+    "name": "James Wilson",
+    "email": "james.wilson@designagency.com",
+    "role": "developer",
+    "department": "Engineering",
+    "hireDate": "2021-09-20",
+    "managerId": "emp-002"
+  },
+  {
+    "id": "emp-005",
+    "name": "Aisha Patel",
+    "email": "aisha.patel@designagency.com",
+    "role": "account_manager",
+    "department": "Client Services",
+    "hireDate": "2020-11-05",
+    "managerId": "emp-001"
+  },
+  {
+    "id": "emp-006",
+    "name": "David Kim",
+    "email": "david.kim@designagency.com",
+    "role": "ux_researcher",
+    "department": "Creative",
+    "hireDate": "2022-04-18",
+    "managerId": "emp-001"
+  },
+  {
+    "id": "emp-007",
+    "name": "Lisa Thompson",
+    "email": "lisa.thompson@designagency.com",
+    "role": "copywriter",
+    "department": "Creative",
+    "hireDate": "2021-02-28",
+    "managerId": "emp-001"
+  },
+  {
+    "id": "emp-008",
+    "name": "Michael Brown",
+    "email": "michael.brown@designagency.com",
+    "role": "developer",
+    "department": "Engineering",
+    "hireDate": "2023-01-15",
+    "managerId": "emp-002"
+  },
+  {
+    "id": "emp-009",
+    "name": "Jennifer Martinez",
+    "email": "jennifer.martinez@designagency.com",
+    "role": "administrator",
+    "department": "Operations",
+    "hireDate": "2019-08-01",
+    "managerId": null
+  },
+  {
+    "id": "emp-010",
+    "name": "Robert Taylor",
+    "email": "robert.taylor@designagency.com",
+    "role": "designer",
+    "department": "Creative",
+    "hireDate": "2023-06-12",
+    "managerId": "emp-001"
+  }
+]

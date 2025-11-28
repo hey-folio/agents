@@ -9,23 +9,22 @@ export async function router(
 ): Promise<Partial<SupervisorUpdate>> {
   const routerDescription = `The route to take based on the user's input.
 ${ALL_TOOL_DESCRIPTIONS}
-- generalInput: handles all other cases where the above tools don't apply
+- generalInput: handles all other cases where the above agents don't apply
 `;
   const routerSchema = z.object({
     route: z
       .enum([
-        "stockbroker",
-        "tripPlanner",
-        "openCode",
-        "orderPizza",
+        "financeAgent",
+        "operationsAgent",
+        "projectsAgent",
+        "policiesAgent",
         "generalInput",
-        "writerAgent",
       ])
       .describe(routerDescription),
   });
   const routerTool = {
     name: "router",
-    description: "A tool to route the user's query to the appropriate tool.",
+    description: "A tool to route the user's query to the appropriate agent.",
     schema: routerSchema,
   };
 
@@ -36,8 +35,16 @@ ${ALL_TOOL_DESCRIPTIONS}
     .bindTools([routerTool], { tool_choice: { type: "tool", name: "router" } })
     .withConfig({ tags: ["langsmith:nostream"] });
 
-  const prompt = `You're a highly helpful AI assistant, tasked with routing the user's query to the appropriate tool.
-You should analyze the user's input, and choose the appropriate tool to use.`;
+  const prompt = `You're a highly helpful AI assistant for a digital design agency's operations team. Your job is to route the user's query to the appropriate specialized agent.
+
+Available agents:
+- financeAgent: For expense submissions, approvals, financial reports, budgets
+- operationsAgent: For travel bookings, meetings, scheduling
+- projectsAgent: For tasks, projects, timesheets, assignments
+- policiesAgent: For company policy questions and HR inquiries
+- generalInput: For general questions and anything not covered above
+
+Analyze the user's input and choose the most appropriate agent.`;
 
   const allMessagesButLast = state.messages.slice(0, -1);
   const lastMessage = state.messages.at(-1);
@@ -46,7 +53,7 @@ You should analyze the user's input, and choose the appropriate tool to use.`;
   const formattedLastMessage = lastMessage ? formatMessages([lastMessage]) : "";
 
   const humanMessage = `Here is the full conversation, excluding the most recent message:
-  
+
 ${formattedPreviousMessages}
 
 Here is the most recent message:

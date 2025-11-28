@@ -1,0 +1,123 @@
+[
+  {
+    "id": "proj-001",
+    "name": "TechStart Brand Refresh",
+    "description": "Complete brand identity redesign for TechStart including logo, color palette, typography, and brand guidelines.",
+    "clientId": "client-001",
+    "clientName": "TechStart Inc.",
+    "status": "active",
+    "startDate": "2024-09-01",
+    "endDate": "2024-12-15",
+    "budget": 85000,
+    "spent": 42500,
+    "teamMembers": [
+      { "id": "emp-001", "name": "Sarah Chen", "role": "Creative Director", "allocation": 30 },
+      { "id": "emp-003", "name": "Emily Rodriguez", "role": "Lead Designer", "allocation": 80 },
+      { "id": "emp-007", "name": "Lisa Thompson", "role": "Copywriter", "allocation": 40 }
+    ],
+    "tags": ["branding", "identity", "tech"],
+    "createdAt": "2024-08-15T10:00:00Z",
+    "updatedAt": "2024-11-20T14:30:00Z"
+  },
+  {
+    "id": "proj-002",
+    "name": "GreenLife E-commerce Platform",
+    "description": "Design and development of a sustainable products e-commerce platform with custom checkout flow.",
+    "clientId": "client-002",
+    "clientName": "GreenLife Co.",
+    "status": "active",
+    "startDate": "2024-10-01",
+    "endDate": "2025-02-28",
+    "budget": 150000,
+    "spent": 35000,
+    "teamMembers": [
+      { "id": "emp-002", "name": "Marcus Johnson", "role": "Project Manager", "allocation": 60 },
+      { "id": "emp-004", "name": "James Wilson", "role": "Lead Developer", "allocation": 100 },
+      { "id": "emp-006", "name": "David Kim", "role": "UX Researcher", "allocation": 50 },
+      { "id": "emp-008", "name": "Michael Brown", "role": "Developer", "allocation": 80 },
+      { "id": "emp-010", "name": "Robert Taylor", "role": "UI Designer", "allocation": 70 }
+    ],
+    "tags": ["e-commerce", "web", "sustainability"],
+    "createdAt": "2024-09-20T09:00:00Z",
+    "updatedAt": "2024-11-25T11:15:00Z"
+  },
+  {
+    "id": "proj-003",
+    "name": "FinanceHub Mobile App",
+    "description": "Mobile application design for personal finance management with budgeting and investment tracking features.",
+    "clientId": "client-003",
+    "clientName": "FinanceHub",
+    "status": "active",
+    "startDate": "2024-11-01",
+    "endDate": "2025-03-31",
+    "budget": 120000,
+    "spent": 18000,
+    "teamMembers": [
+      { "id": "emp-001", "name": "Sarah Chen", "role": "Creative Director", "allocation": 20 },
+      { "id": "emp-003", "name": "Emily Rodriguez", "role": "UI Designer", "allocation": 60 },
+      { "id": "emp-006", "name": "David Kim", "role": "UX Researcher", "allocation": 80 }
+    ],
+    "tags": ["mobile", "fintech", "app"],
+    "createdAt": "2024-10-15T14:00:00Z",
+    "updatedAt": "2024-11-22T16:45:00Z"
+  },
+  {
+    "id": "proj-004",
+    "name": "Artisan Coffee Website Redesign",
+    "description": "Website redesign focusing on storytelling and e-commerce integration for specialty coffee roaster.",
+    "clientId": "client-004",
+    "clientName": "Artisan Coffee Roasters",
+    "status": "planning",
+    "startDate": "2025-01-15",
+    "endDate": "2025-04-30",
+    "budget": 65000,
+    "spent": 0,
+    "teamMembers": [
+      { "id": "emp-002", "name": "Marcus Johnson", "role": "Project Manager", "allocation": 40 },
+      { "id": "emp-010", "name": "Robert Taylor", "role": "Lead Designer", "allocation": 90 },
+      { "id": "emp-007", "name": "Lisa Thompson", "role": "Copywriter", "allocation": 60 }
+    ],
+    "tags": ["website", "food-beverage", "e-commerce"],
+    "createdAt": "2024-11-10T10:30:00Z",
+    "updatedAt": "2024-11-10T10:30:00Z"
+  },
+  {
+    "id": "proj-005",
+    "name": "Metro Health Clinic Signage",
+    "description": "Environmental design and wayfinding signage system for new healthcare facility.",
+    "clientId": "client-005",
+    "clientName": "Metro Health Network",
+    "status": "on_hold",
+    "startDate": "2024-07-01",
+    "endDate": "2024-10-31",
+    "budget": 45000,
+    "spent": 38000,
+    "teamMembers": [
+      { "id": "emp-003", "name": "Emily Rodriguez", "role": "Lead Designer", "allocation": 20 }
+    ],
+    "tags": ["environmental", "healthcare", "signage"],
+    "createdAt": "2024-06-15T08:00:00Z",
+    "updatedAt": "2024-10-15T12:00:00Z"
+  },
+  {
+    "id": "proj-006",
+    "name": "Velocity Sports Marketing Campaign",
+    "description": "Integrated marketing campaign including social media assets, video content, and print materials.",
+    "clientId": "client-006",
+    "clientName": "Velocity Sports",
+    "status": "completed",
+    "startDate": "2024-06-01",
+    "endDate": "2024-09-30",
+    "budget": 95000,
+    "spent": 92500,
+    "teamMembers": [
+      { "id": "emp-001", "name": "Sarah Chen", "role": "Creative Director", "allocation": 40 },
+      { "id": "emp-005", "name": "Aisha Patel", "role": "Account Manager", "allocation": 50 },
+      { "id": "emp-007", "name": "Lisa Thompson", "role": "Copywriter", "allocation": 70 },
+      { "id": "emp-003", "name": "Emily Rodriguez", "role": "Designer", "allocation": 60 }
+    ],
+    "tags": ["marketing", "sports", "campaign"],
+    "createdAt": "2024-05-01T11:00:00Z",
+    "updatedAt": "2024-10-01T09:30:00Z"
+  }
+]

@@ -26,5 +26,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "agent"]
+  "include": ["src", "agent"],
+  "exclude": ["src/agent/examples", "src/agent-uis/examples"]
 }

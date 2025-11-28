@@ -1,8 +1,8 @@
 import { StateGraph, START, END } from "@langchain/langgraph";
-import { stockbrokerGraph } from "../stockbroker";
-import { tripPlannerGraph } from "../trip-planner";
-import { graph as openCodeGraph } from "../open-code";
-import { graph as orderPizzaGraph } from "../pizza-orderer";
+import { financeGraph } from "../finance-agent";
+import { operationsGraph } from "../operations-agent";
+import { projectsGraph } from "../projects-agent";
+import { policiesGraph } from "../policies-agent";
 import {
   SupervisorAnnotation,
   SupervisorState,
@@ -10,49 +10,43 @@ import {
 } from "./types";
 import { generalInput } from "./nodes/general-input";
 import { router } from "./nodes/router";
-import { graph as writerAgentGraph } from "../writer-agent";
 
-export const ALL_TOOL_DESCRIPTIONS = `- stockbroker: can fetch the price of a ticker, purchase/sell a ticker, or get the user's portfolio
-- tripPlanner: helps the user plan their trip. it can suggest restaurants, and places to stay in any given location.
-- openCode: can write a React TODO app for the user. Only call this tool if they request a TODO app.
-- orderPizza: can order a pizza for the user
-- writerAgent: can write a text document for the user. Only call this tool if they request a text document.`;
+export const ALL_TOOL_DESCRIPTIONS = `- financeAgent: handles expense submissions, approvals, financial reporting, and budget tracking. Use for expense reports, reimbursements, financial summaries, and spending analysis.
+- operationsAgent: manages travel bookings (flights, hotels), meeting scheduling, and operational logistics. Use for booking trips, scheduling meetings, and viewing travel itineraries.
+- projectsAgent: handles project management, task tracking, timesheets, and team workload. Use for creating/updating tasks, logging time, viewing project status, and managing assignments.
+- policiesAgent: provides information about company policies including expenses, travel, time off, remote work, equipment, conduct, security, and benefits. Use for policy questions and HR-related inquiries.`;
 
 function handleRoute(
   state: SupervisorState,
 ):
-  | "stockbroker"
-  | "tripPlanner"
-  | "openCode"
-  | "orderPizza"
-  | "generalInput"
-  | "writerAgent" {
+  | "financeAgent"
+  | "operationsAgent"
+  | "projectsAgent"
+  | "policiesAgent"
+  | "generalInput" {
   return state.next;
 }
 
 const builder = new StateGraph(SupervisorAnnotation, SupervisorZodConfiguration)
   .addNode("router", router)
-  .addNode("stockbroker", stockbrokerGraph)
-  .addNode("tripPlanner", tripPlannerGraph)
-  .addNode("openCode", openCodeGraph)
-  .addNode("orderPizza", orderPizzaGraph)
+  .addNode("financeAgent", financeGraph)
+  .addNode("operationsAgent", operationsGraph)
+  .addNode("projectsAgent", projectsGraph)
+  .addNode("policiesAgent", policiesGraph)
   .addNode("generalInput", generalInput)
-  .addNode("writerAgent", writerAgentGraph)
   .addConditionalEdges("router", handleRoute, [
-    "stockbroker",
-    "tripPlanner",
-    "openCode",
-    "orderPizza",
+    "financeAgent",
+    "operationsAgent",
+    "projectsAgent",
+    "policiesAgent",
     "generalInput",
-    "writerAgent",
   ])
   .addEdge(START, "router")
-  .addEdge("stockbroker", END)
-  .addEdge("tripPlanner", END)
-  .addEdge("openCode", END)
-  .addEdge("orderPizza", END)
-  .addEdge("generalInput", END)
-  .addEdge("writerAgent", END);
+  .addEdge("financeAgent", END)
+  .addEdge("operationsAgent", END)
+  .addEdge("projectsAgent", END)
+  .addEdge("policiesAgent", END)
+  .addEdge("generalInput", END);
 
 export const graph = builder.compile();
-graph.name = "Generative UI Agent";
+graph.name = "Operations Team Agent";
