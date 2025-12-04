@@ -29,7 +29,7 @@ ${ALL_TOOL_DESCRIPTIONS}
   };
 
   const llm = new ChatAnthropic({
-    model: "claude-sonnet-4-20250514",
+    model: "claude-haiku-4-5-20251001",
     temperature: 0,
   })
     .bindTools([routerTool], { tool_choice: { type: "tool", name: "router" } })
