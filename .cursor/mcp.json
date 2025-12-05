@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "docs-langchain": {
+      "url": "https://docs.langchain.com/mcp"
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "ctx7sk-9c971480-6a9d-4013-928b-af7a27ab8d0c"
+      }
+    }
+  }
+}
