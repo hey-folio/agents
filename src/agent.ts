@@ -1,8 +1,10 @@
 import { tool, createAgent } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 import { z } from "zod";
+import type { RunnableConfig } from "@langchain/core/runnables";
 import { tasksAgent } from "./agents/tasksAgent.js";
 import { generalAgent } from "./agents/generalAgent.js";
+import { setAgentContext, clearAgentContext } from "./tools/taskTools.js";
 
 // Checkpointer for state persistence (required by LangSmith Studio)
 const checkpointer = new MemorySaver();
@@ -21,15 +23,31 @@ const checkpointer = new MemorySaver();
 
 // Wrap the tasks agent as a tool for the supervisor
 const manageTasks = tool(
-  async ({ request }) => {
-    const result = await tasksAgent.invoke({
-      messages: [{ role: "user", content: request }],
-    });
-    // Extract the last message content from the agent's response
-    const lastMessage = result.messages[result.messages.length - 1];
-    return typeof lastMessage.content === "string"
-      ? lastMessage.content
-      : JSON.stringify(lastMessage.content);
+  async ({ request }, config?: RunnableConfig) => {
+    // Extract tenant context from config.configurable
+    const tenantId = config?.configurable?.tenant_id as string | undefined;
+    const userId = config?.configurable?.user_id as string | undefined;
+
+    if (!tenantId || !userId) {
+      return "Error: Agent context not configured. Please ensure tenantId and userId are passed in the request config.";
+    }
+
+    // Set the agent context for task tools
+    setAgentContext({ tenantId, userId });
+
+    try {
+      const result = await tasksAgent.invoke({
+        messages: [{ role: "user", content: request }],
+      });
+      // Extract the last message content from the agent's response
+      const lastMessage = result.messages[result.messages.length - 1];
+      return typeof lastMessage.content === "string"
+        ? lastMessage.content
+        : JSON.stringify(lastMessage.content);
+    } finally {
+      // Clean up context after task agent completes
+      clearAgentContext();
+    }
   },
   {
     name: "manage_tasks",
