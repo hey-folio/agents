@@ -17,7 +17,7 @@ import { taskTools } from "../tools/taskTools.js";
  * before invoking this agent.
  */
 export const tasksAgent = createAgent({
-  model: "claude-sonnet-4-5-20250929",
+  model: "claude-haiku-4-5-20251001",
   tools: taskTools,
   systemPrompt: `You are a task management assistant. Your role is to help users manage their tasks effectively.
 

@@ -36,9 +36,13 @@ const manageTasks = tool(
     setAgentContext({ tenantId, userId });
 
     try {
-      const result = await tasksAgent.invoke({
-        messages: [{ role: "user", content: request }],
-      });
+      // Pass langsmith:nostream tag to prevent subagent messages from streaming to UI
+      const result = await tasksAgent.invoke(
+        {
+          messages: [{ role: "user", content: request }],
+        },
+        { tags: ["langsmith:nostream"] }
+      );
       // Extract the last message content from the agent's response
       const lastMessage = result.messages[result.messages.length - 1];
       return typeof lastMessage.content === "string"
@@ -69,9 +73,13 @@ Output: The result of the task operation`,
 // Wrap the general agent as a tool for the supervisor
 const handleGeneral = tool(
   async ({ request }) => {
-    const result = await generalAgent.invoke({
-      messages: [{ role: "user", content: request }],
-    });
+    // Pass langsmith:nostream tag to prevent subagent messages from streaming to UI
+    const result = await generalAgent.invoke(
+      {
+        messages: [{ role: "user", content: request }],
+      },
+      { tags: ["langsmith:nostream"] }
+    );
     // Extract the last message content from the agent's response
     const lastMessage = result.messages[result.messages.length - 1];
     return typeof lastMessage.content === "string"
@@ -103,7 +111,7 @@ Output: A helpful response`,
  * - Everything else -> handleGeneral -> generalAgent
  */
 export const agent = createAgent({
-  model: "claude-sonnet-4-5-20250929",
+  model: "claude-haiku-4-5-20251001",
   tools: [manageTasks, handleGeneral],
   checkpointer,
   systemPrompt: `You are a helpful supervisor assistant that routes user requests to specialized agents.
