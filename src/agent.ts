@@ -1,13 +1,78 @@
-import { tool, createAgent } from "langchain";
+import { tool, createAgent, createMiddleware } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
+import { ChatAnthropic } from "@langchain/anthropic";
 import { z } from "zod";
 import type { RunnableConfig } from "@langchain/core/runnables";
+import type { BaseMessage } from "@langchain/core/messages";
 import { tasksAgent } from "./agents/tasksAgent.js";
 import { generalAgent } from "./agents/generalAgent.js";
 import { setAgentContext, clearAgentContext } from "./tools/taskTools.js";
 
+// Schema for structured suggestion output
+const SuggestionsSchema = z.object({
+  suggestions: z
+    .array(z.string())
+    .min(2)
+    .max(4)
+    .describe("2-4 brief follow-up suggestions the user might ask next"),
+});
+
+// Model with structured output for suggestion generation
+const suggestionModel = new ChatAnthropic({
+  model: "claude-haiku-4-5-20251001",
+  maxTokens: 200,
+}).withStructuredOutput(SuggestionsSchema);
+
 // Checkpointer for state persistence (required by LangSmith Studio)
 const checkpointer = new MemorySaver();
+
+/**
+ * Suggestion Middleware
+ *
+ * Generates 2-4 contextual follow-up suggestions after the agent completes.
+ * Runs in the afterAgent hook to avoid blocking the main conversation.
+ */
+const suggestionMiddleware = createMiddleware({
+  name: "SuggestionGenerator",
+  stateSchema: z.object({
+    suggestions: z.array(z.string()).default([]),
+  }),
+  afterAgent: async (state: { messages: BaseMessage[] }) => {
+    try {
+      // Format last 6 messages for context
+      const context = state.messages
+        .slice(-6)
+        .filter((m) => m.getType() === "human" || m.getType() === "ai")
+        .map((m) => {
+          const role = m.getType() === "human" ? "User" : "Assistant";
+          const content =
+            typeof m.content === "string"
+              ? m.content
+              : JSON.stringify(m.content);
+          return `${role}: ${content}`;
+        })
+        .join("\n");
+
+      const result = await suggestionModel.invoke(
+        `Based on this conversation, generate 2-4 brief follow-up suggestions the user might ask next.
+
+Conversation:
+${context}
+
+Guidelines:
+- Keep each suggestion SHORT (5-10 words max)
+- Make them relevant to what was discussed
+- For task discussions: suggest task actions ("Show my tasks", "Mark it as done")
+- For general topics: suggest related questions
+- Never repeat what the user already asked`
+      );
+
+      return { suggestions: result.suggestions };
+    } catch {
+      return { suggestions: [] };
+    }
+  },
+});
 
 /**
  * Supervisor Agent Pattern Implementation
@@ -114,6 +179,7 @@ export const agent = createAgent({
   model: "claude-haiku-4-5-20251001",
   tools: [manageTasks, handleGeneral],
   checkpointer,
+  middleware: [suggestionMiddleware],
   systemPrompt: `You are a helpful supervisor assistant that routes user requests to specialized agents.
 
 You have two capabilities:
