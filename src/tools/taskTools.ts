@@ -2,11 +2,12 @@
  * Task Tools for LangGraph Agent
  *
  * These tools connect to Convex for persistent task storage.
- * The agent context (tenantId, userId) must be set before using these tools.
+ * Context (tenantId, userId) is accessed via runtime.context using LangChain v1's contextSchema.
  */
 
 import { tool } from "langchain";
 import { z } from "zod";
+import type { ToolRuntime } from "@langchain/core/tools";
 import {
   listTasks as convexListTasks,
   getTask as convexGetTask,
@@ -15,45 +16,25 @@ import {
   removeTask as convexRemoveTask,
   type Task,
 } from "../lib/convex.js";
+import { agentContextSchema, type AgentContext } from "../context.js";
+
+// Type alias for the tool runtime
+type AgentToolRuntime = ToolRuntime<unknown, typeof agentContextSchema>;
 
 /**
- * Agent context for tenant-scoped operations.
- * Must be set before invoking the agent.
+ * Extract tenant context from runtime.config.configurable.
+ * Returns null if context is missing.
  */
-export interface AgentContext {
-  tenantId: string;
-  userId: string;
-}
+function getContextFromRuntime(runtime?: AgentToolRuntime): AgentContext | null {
+  const configurable = runtime?.config?.configurable as Record<string, unknown> | undefined;
+  const tenantId = configurable?.tenantId as string | undefined;
+  const userId = configurable?.userId as string | undefined;
 
-// Module-level context - set this before running the agent
-let agentContext: AgentContext | null = null;
-
-/**
- * Set the agent context for tenant-scoped operations.
- * Call this before invoking the agent.
- */
-export function setAgentContext(context: AgentContext): void {
-  agentContext = context;
-}
-
-/**
- * Get the current agent context.
- * Throws if context is not set.
- */
-function getContext(): AgentContext {
-  if (!agentContext) {
-    throw new Error(
-      "Agent context not set. Call setAgentContext() before using task tools."
-    );
+  if (!tenantId || !userId) {
+    return null;
   }
-  return agentContext;
-}
 
-/**
- * Clear the agent context (for cleanup).
- */
-export function clearAgentContext(): void {
-  agentContext = null;
+  return { tenantId, userId };
 }
 
 /**
@@ -74,8 +55,11 @@ function formatTask(task: Task): string {
  * List all tasks for the current tenant
  */
 export const listTasks = tool(
-  async () => {
-    const ctx = getContext();
+  async (_input: Record<string, never>, runtime?: AgentToolRuntime) => {
+    const ctx = getContextFromRuntime(runtime);
+    if (!ctx) {
+      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+    }
 
     try {
       const tasks = await convexListTasks({
@@ -105,8 +89,11 @@ export const listTasks = tool(
  * Get a single task by ID
  */
 export const getTask = tool(
-  async ({ id }) => {
-    const ctx = getContext();
+  async ({ id }, runtime?: AgentToolRuntime) => {
+    const ctx = getContextFromRuntime(runtime);
+    if (!ctx) {
+      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+    }
 
     try {
       const task = await convexGetTask({
@@ -137,8 +124,11 @@ export const getTask = tool(
  * Create a new task
  */
 export const createTask = tool(
-  async ({ title, description, status, label, priority }) => {
-    const ctx = getContext();
+  async ({ title, description, status, label, priority }, runtime?: AgentToolRuntime) => {
+    const ctx = getContextFromRuntime(runtime);
+    if (!ctx) {
+      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+    }
 
     try {
       const taskId = await convexCreateTask({
@@ -186,8 +176,11 @@ export const createTask = tool(
  * Update an existing task
  */
 export const updateTask = tool(
-  async ({ id, title, description, status, label, priority }) => {
-    const ctx = getContext();
+  async ({ id, title, description, status, label, priority }, runtime?: AgentToolRuntime) => {
+    const ctx = getContextFromRuntime(runtime);
+    if (!ctx) {
+      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+    }
 
     try {
       await convexUpdateTask({
@@ -244,8 +237,11 @@ export const updateTask = tool(
  * Delete a task
  */
 export const deleteTask = tool(
-  async ({ id }) => {
-    const ctx = getContext();
+  async ({ id }, runtime?: AgentToolRuntime) => {
+    const ctx = getContextFromRuntime(runtime);
+    if (!ctx) {
+      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+    }
 
     try {
       await convexRemoveTask({

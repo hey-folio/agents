@@ -12,9 +12,7 @@ import { taskTools } from "../tools/taskTools.js";
  * - Deleting tasks
  *
  * It accepts natural language requests and uses the appropriate tools.
- *
- * NOTE: The agent context (tenantId, userId) must be set via setAgentContext()
- * before invoking this agent.
+ * Context (tenantId, userId) is passed via config.configurable from the supervisor.
  */
 export const tasksAgent = createAgent({
   model: "claude-haiku-4-5-20251001",

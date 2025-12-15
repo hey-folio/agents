@@ -2,11 +2,14 @@ import { tool, createAgent, createMiddleware } from "langchain";
 import { MemorySaver } from "@langchain/langgraph";
 import { ChatAnthropic } from "@langchain/anthropic";
 import { z } from "zod";
-import type { RunnableConfig } from "@langchain/core/runnables";
-import type { BaseMessage } from "@langchain/core/messages";
+import type { ToolRuntime } from "@langchain/core/tools";
+import { AIMessage, ToolMessage, type BaseMessage } from "@langchain/core/messages";
 import { tasksAgent } from "./agents/tasksAgent.js";
 import { generalAgent } from "./agents/generalAgent.js";
-import { setAgentContext, clearAgentContext } from "./tools/taskTools.js";
+import { agentContextSchema } from "./context.js";
+
+// Type alias for tool runtime with our context schema
+type AgentToolRuntime = ToolRuntime<unknown, typeof agentContextSchema>;
 
 // Schema for structured suggestion output
 const SuggestionsSchema = z.object({
@@ -86,37 +89,97 @@ Guidelines:
  * - Top layer: Supervisor routing to high-level capabilities
  */
 
+// Helper to extract subagent tool calls and results from messages
+interface SubagentToolCall {
+  type: "tool_call";
+  name: string;
+  args: Record<string, unknown>;
+  id?: string;
+}
+
+interface SubagentToolResult {
+  type: "tool_result";
+  name: string;
+  content: string;
+  toolCallId?: string;
+}
+
+type SubagentMessage = SubagentToolCall | SubagentToolResult;
+
+function extractSubagentMessages(
+  messages: BaseMessage[]
+): SubagentMessage[] {
+  const subagentMessages: SubagentMessage[] = [];
+
+  for (const msg of messages) {
+    // Extract tool calls from AI messages using proper type guards
+    if (msg instanceof AIMessage && msg.tool_calls?.length) {
+      for (const tc of msg.tool_calls) {
+        subagentMessages.push({
+          type: "tool_call",
+          name: tc.name,
+          args: tc.args as Record<string, unknown>,
+          id: tc.id,
+        });
+      }
+    }
+
+    // Extract tool results using proper type guards
+    if (msg instanceof ToolMessage) {
+      subagentMessages.push({
+        type: "tool_result",
+        name: msg.name || "unknown",
+        content:
+          typeof msg.content === "string"
+            ? msg.content
+            : JSON.stringify(msg.content),
+        toolCallId: msg.tool_call_id,
+      });
+    }
+  }
+
+  return subagentMessages;
+}
+
 // Wrap the tasks agent as a tool for the supervisor
 const manageTasks = tool(
-  async ({ request }, config?: RunnableConfig) => {
-    // Extract tenant context from config.configurable
-    const tenantId = config?.configurable?.tenant_id as string | undefined;
-    const userId = config?.configurable?.user_id as string | undefined;
+  async ({ request }, runtime?: AgentToolRuntime) => {
+    // Get tenant context from config.configurable
+    const configurable = runtime?.config?.configurable as Record<string, unknown> | undefined;
+    const tenantId = configurable?.tenantId as string | undefined;
+    const userId = configurable?.userId as string | undefined;
 
     if (!tenantId || !userId) {
-      return "Error: Agent context not configured. Please ensure tenantId and userId are passed in the request config.";
+      return JSON.stringify({
+        result: "Error: Agent context not configured. Please ensure tenantId and userId are passed.",
+        subagentMessages: [],
+      });
     }
 
-    // Set the agent context for task tools
-    setAgentContext({ tenantId, userId });
+    // Invoke tasks agent with config passed through
+    const result = await tasksAgent.invoke(
+      { messages: [{ role: "user", content: request }] },
+      { configurable: { tenantId, userId } }
+    );
 
-    try {
-      // Pass langsmith:nostream tag to prevent subagent messages from streaming to UI
-      const result = await tasksAgent.invoke(
-        {
-          messages: [{ role: "user", content: request }],
-        },
-        { tags: ["langsmith:nostream"] }
-      );
-      // Extract the last message content from the agent's response
-      const lastMessage = result.messages[result.messages.length - 1];
-      return typeof lastMessage.content === "string"
+    // Extract the last message content from the agent's response
+    const lastMessage = result.messages[result.messages.length - 1];
+    const responseText =
+      typeof lastMessage.content === "string"
         ? lastMessage.content
         : JSON.stringify(lastMessage.content);
-    } finally {
-      // Clean up context after task agent completes
-      clearAgentContext();
-    }
+
+    // Extract subagent tool calls and results (excluding the initial user message)
+    const subagentMessages = extractSubagentMessages(
+      result.messages.slice(1, -1) // Exclude first (user) and last (final response)
+    );
+
+    // Return structured response with subagent messages
+    return JSON.stringify({
+      result: responseText,
+      subagentMessages,
+      subagent: "tasks",
+    });
   },
   {
     name: "manage_tasks",
@@ -138,18 +201,28 @@ Output: The result of the task operation`,
 // Wrap the general agent as a tool for the supervisor
 const handleGeneral = tool(
   async ({ request }) => {
-    // Pass langsmith:nostream tag to prevent subagent messages from streaming to UI
-    const result = await generalAgent.invoke(
-      {
-        messages: [{ role: "user", content: request }],
-      },
-      { tags: ["langsmith:nostream"] }
-    );
+    const result = await generalAgent.invoke({
+      messages: [{ role: "user", content: request }],
+    });
+
     // Extract the last message content from the agent's response
     const lastMessage = result.messages[result.messages.length - 1];
-    return typeof lastMessage.content === "string"
-      ? lastMessage.content
-      : JSON.stringify(lastMessage.content);
+    const responseText =
+      typeof lastMessage.content === "string"
+        ? lastMessage.content
+        : JSON.stringify(lastMessage.content);
+
+    // Extract subagent tool calls and results (excluding the initial user message)
+    const subagentMessages = extractSubagentMessages(
+      result.messages.slice(1, -1) // Exclude first (user) and last (final response)
+    );
+
+    // Return structured response with subagent messages
+    return JSON.stringify({
+      result: responseText,
+      subagentMessages,
+      subagent: "general",
+    });
   },
   {
     name: "handle_general",
