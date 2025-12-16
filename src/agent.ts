@@ -1,9 +1,9 @@
 import { tool, createAgent, createMiddleware } from "langchain";
-import { MemorySaver } from "@langchain/langgraph";
+import { MemorySaver, getCurrentTaskInput } from "@langchain/langgraph";
 import { ChatAnthropic } from "@langchain/anthropic";
 import { z } from "zod";
 import type { ToolRuntime } from "@langchain/core/tools";
-import { AIMessage, ToolMessage, type BaseMessage } from "@langchain/core/messages";
+import { AIMessage, HumanMessage, ToolMessage, type BaseMessage } from "@langchain/core/messages";
 import { tasksAgent } from "./agents/tasksAgent.js";
 import { generalAgent } from "./agents/generalAgent.js";
 import { agentContextSchema } from "./context.js";
@@ -141,6 +141,7 @@ function extractSubagentMessages(
   return subagentMessages;
 }
 
+
 // Wrap the tasks agent as a tool for the supervisor
 const manageTasks = tool(
   async ({ request }, runtime?: AgentToolRuntime) => {
@@ -156,9 +157,27 @@ const manageTasks = tool(
       });
     }
 
-    // Invoke tasks agent with config passed through
+    // Get conversation context using LangChain pattern
+    // Access full thread messages from the config
+    const currentMessages = getCurrentTaskInput<{ messages: BaseMessage[] }>(runtime?.config).messages;
+
+    // Find the original user message for context
+    const originalUserMessage = currentMessages?.find(HumanMessage.isInstance);
+
+    // Build enriched prompt following LangChain pattern
+    const enrichedRequest = `
+You are assisting with the following user inquiry:
+
+${originalUserMessage?.content || "No context available"}
+
+You are tasked with the following sub-request:
+
+${request}
+    `.trim();
+
+    // Invoke tasks agent with enriched request that includes known task IDs
     const result = await tasksAgent.invoke(
-      { messages: [{ role: "user", content: request }] },
+      { messages: [{ role: "user", content: enrichedRequest }] },
       { configurable: { tenantId, userId } }
     );
 
@@ -281,22 +300,26 @@ Routing guidelines:
 - If the user mentions tasks, todos, to-do items, or anything about managing work items -> use manage_tasks
 - For general questions, conversations, or anything else -> use handle_general
 
-IMPORTANT - Handling task form interactions:
+IMPORTANT - Pass task IDs when known:
 
-When user wants to SAVE/CONFIRM a pending form ("save it", "looks good", "submit", "create it", "yes"):
-- Pass the full task details to manage_tasks: "Create the task: title='X', description='Y', status='todo', priority='high', label='feature'"
-- The sub-agent will call create_task to save it directly
+The sub-agent does NOT have conversation history. When you've already shown tasks to the user (via search/list), you MUST pass task IDs for subsequent operations.
 
-When user wants to MODIFY a pending form ("change priority to high", "update the title"):
-- The sub-agent does NOT have conversation history, so you MUST include ALL current form values
-- Include: title, description, status, label, priority - even unchanged fields
-- Pass a request like: "Update the proposed task with these current values: title='X', description='Y', status='Z', label='W', priority='V' - change priority to high"
+For DELETE/UPDATE operations on known tasks:
+- Look at previous tool results to find the task ID
+- Pass: "Delete task with ID 'j578ffqm...' (title: '2026 Marketing Proposal')"
+- Or: "Update task with ID 'abc123': set priority to high"
 
-Example of modification:
-- Previous: propose_task showed form for "Create 2026 strategy" with description "Plan for Q1..." and medium priority
-- User says: "change it to high priority"
-- You pass to manage_tasks: "Propose task with: title='Create 2026 strategy', description='Plan for Q1...', status='todo', label='feature', priority='high'"
-- IMPORTANT: Always include the description even if user didn't mention it!
+Example flow:
+1. User: "show 2026 tasks" → you call manage_tasks, results show task IDs in the response
+2. User: "delete the marketing one" → you pass: "Delete task with ID 'j578ffqm5qs784q7xzzd60aq997xcay9' (2026 Marketing Proposal)"
+3. Sub-agent uses the ID directly without re-searching
+
+For CREATE operations with explicit details:
+- Pass: "Create the task: title='X', description='Y', status='todo', priority='high', label='feature'"
+
+For MODIFYING a pending form:
+- Include ALL current form values + the change
+- Pass: "Propose task with: title='X', description='Y', status='Z', label='W', priority='V'"
 
 Always route the user's request to the appropriate tool.
 
