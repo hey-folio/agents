@@ -127,6 +127,12 @@ export interface AgentTaskRemoveArgs {
   id: string;
 }
 
+export interface AgentTaskSearchArgs {
+  tenantId: string;
+  userId: string;
+  query: string;
+}
+
 /**
  * Helper functions to call the internal agent task functions.
  */
@@ -168,5 +174,13 @@ export async function removeTask(args: AgentTaskRemoveArgs): Promise<null> {
     "agent/tasks:remove",
     args as unknown as Record<string, unknown>,
     "mutation"
+  );
+}
+
+export async function searchTasks(args: AgentTaskSearchArgs): Promise<Task[]> {
+  return convexRequest<Task[]>(
+    "agent/tasks:search",
+    args as unknown as Record<string, unknown>,
+    "query"
   );
 }

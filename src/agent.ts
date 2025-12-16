@@ -174,11 +174,29 @@ const manageTasks = tool(
       result.messages.slice(1, -1) // Exclude first (user) and last (final response)
     );
 
-    // Return structured response with subagent messages
+    // Extract ALL __ui__ components from subagent tool results
+    // Task tools return JSON with { text, __ui__ } structure
+    // Multiple tools may each emit UI (e.g., list_tasks + propose_task_update)
+    const uiComponents: Array<{ name: string; props: Record<string, unknown> }> = [];
+    for (const msg of subagentMessages) {
+      if (msg.type === "tool_result") {
+        try {
+          const parsed = JSON.parse(msg.content);
+          if (parsed && typeof parsed === "object" && parsed.__ui__) {
+            uiComponents.push(parsed.__ui__);
+          }
+        } catch {
+          // Not JSON, skip
+        }
+      }
+    }
+
+    // Return structured response with subagent messages and ALL UI components
     return JSON.stringify({
       result: responseText,
       subagentMessages,
       subagent: "tasks",
+      __ui__: uiComponents.length > 0 ? uiComponents : undefined,
     });
   },
   {
@@ -248,7 +266,7 @@ Output: A helpful response`,
  * - Task-related requests -> manageTasks -> tasksAgent
  * - Everything else -> handleGeneral -> generalAgent
  */
-export const agent = createAgent({
+export const agent: ReturnType<typeof createAgent> = createAgent({
   model: "claude-haiku-4-5-20251001",
   tools: [manageTasks, handleGeneral],
   checkpointer,
@@ -263,6 +281,32 @@ Routing guidelines:
 - If the user mentions tasks, todos, to-do items, or anything about managing work items -> use manage_tasks
 - For general questions, conversations, or anything else -> use handle_general
 
-Always route the user's request to the appropriate tool. Pass the user's request naturally to the tool.
-After receiving the result, provide a clear response to the user.`,
+IMPORTANT - Handling task form interactions:
+
+When user wants to SAVE/CONFIRM a pending form ("save it", "looks good", "submit", "create it", "yes"):
+- Pass the full task details to manage_tasks: "Create the task: title='X', description='Y', status='todo', priority='high', label='feature'"
+- The sub-agent will call create_task to save it directly
+
+When user wants to MODIFY a pending form ("change priority to high", "update the title"):
+- The sub-agent does NOT have conversation history, so you MUST include ALL current form values
+- Include: title, description, status, label, priority - even unchanged fields
+- Pass a request like: "Update the proposed task with these current values: title='X', description='Y', status='Z', label='W', priority='V' - change priority to high"
+
+Example of modification:
+- Previous: propose_task showed form for "Create 2026 strategy" with description "Plan for Q1..." and medium priority
+- User says: "change it to high priority"
+- You pass to manage_tasks: "Propose task with: title='Create 2026 strategy', description='Plan for Q1...', status='todo', label='feature', priority='high'"
+- IMPORTANT: Always include the description even if user didn't mention it!
+
+Always route the user's request to the appropriate tool.
+
+CRITICAL - UI components already show the data:
+When the tool result includes __ui__ (TaskTable, TaskEditForm, etc.), the UI will render a rich visualization.
+- Do NOT repeat the data in text/markdown - no tables, no bullet lists of fields
+- Instead, give a brief conversational summary
+- Examples:
+  - TaskTable shown → "You have 3 tasks. 'Review Ferrari proposal' is due tomorrow."
+  - TaskEditForm shown → "Here's the form - review and submit when ready."
+  - For list_tasks: mention count and highlight 1-2 important items (due soon, high priority)
+- Keep responses to 1-2 sentences max when UI is shown`,
 });
