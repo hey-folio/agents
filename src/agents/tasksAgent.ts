@@ -1,5 +1,6 @@
 import { createAgent } from "langchain";
 import { taskTools } from "../tools/taskTools.js";
+import { defaultModel } from "../lib/models.js";
 
 /**
  * Tasks Agent - Specialized agent for task management
@@ -19,7 +20,7 @@ import { taskTools } from "../tools/taskTools.js";
  * because subagent interrupts don't propagate to the parent correctly.
  */
 export const tasksAgent: ReturnType<typeof createAgent> = createAgent({
-  model: "claude-haiku-4-5-20251001",
+  model: defaultModel,
   tools: taskTools,
   systemPrompt: `You are a task management assistant. Your role is to help users manage their tasks effectively.
 

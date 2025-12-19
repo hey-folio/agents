@@ -1,4 +1,5 @@
 import { createAgent } from "langchain";
+import { defaultModel } from "../lib/models.js";
 
 /**
  * General Agent - Handles all non-task related questions and conversations
@@ -8,7 +9,7 @@ import { createAgent } from "langchain";
  * with anything that isn't task management.
  */
 export const generalAgent = createAgent({
-  model: "claude-haiku-4-5-20251001",
+  model: defaultModel,
   tools: [],
   systemPrompt: `You are a helpful general assistant. Your role is to help users with any questions or conversations that are not related to task management.
 
