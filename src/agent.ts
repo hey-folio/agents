@@ -1,30 +1,15 @@
 import { tool, createAgent, createMiddleware } from "langchain";
 import { MemorySaver, getCurrentTaskInput } from "@langchain/langgraph";
-import { ChatAnthropic } from "@langchain/anthropic";
 import { z } from "zod";
 import type { ToolRuntime } from "@langchain/core/tools";
 import { AIMessage, HumanMessage, ToolMessage, type BaseMessage } from "@langchain/core/messages";
 import { tasksAgent } from "./agents/tasksAgent.js";
 import { generalAgent } from "./agents/generalAgent.js";
 import { agentContextSchema } from "./context.js";
+import { defaultModel, suggestionModel } from "./lib/models.js";
 
 // Type alias for tool runtime with our context schema
 type AgentToolRuntime = ToolRuntime<unknown, typeof agentContextSchema>;
-
-// Schema for structured suggestion output
-const SuggestionsSchema = z.object({
-  suggestions: z
-    .array(z.string())
-    .min(2)
-    .max(4)
-    .describe("2-4 brief follow-up suggestions the user might ask next"),
-});
-
-// Model with structured output for suggestion generation
-const suggestionModel = new ChatAnthropic({
-  model: "claude-haiku-4-5-20251001",
-  maxTokens: 200,
-}).withStructuredOutput(SuggestionsSchema);
 
 // Checkpointer for state persistence (required by LangSmith Studio)
 const checkpointer = new MemorySaver();
@@ -286,7 +271,7 @@ Output: A helpful response`,
  * - Everything else -> handleGeneral -> generalAgent
  */
 export const agent: ReturnType<typeof createAgent> = createAgent({
-  model: "claude-haiku-4-5-20251001",
+  model: defaultModel,
   tools: [manageTasks, handleGeneral],
   checkpointer,
   middleware: [suggestionMiddleware],
