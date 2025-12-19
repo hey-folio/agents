@@ -2,9 +2,10 @@
   "name": "agents",
   "version": "1.0.0",
   "type": "module",
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "dev": "tsx src/agent.ts",
-    "studio": "npx @langchain/langgraph-cli dev"
+    "studio": "pnpm dlx @langchain/langgraph-cli dev"
   },
   "dependencies": {
     "@langchain/anthropic": "^1.2.3",
