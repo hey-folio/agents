@@ -30,12 +30,13 @@ function getContextFromRuntime(runtime?: AgentToolRuntime): AgentContext | null 
   const configurable = runtime?.config?.configurable as Record<string, unknown> | undefined;
   const tenantId = configurable?.tenantId as string | undefined;
   const userId = configurable?.userId as string | undefined;
+  const personId = configurable?.personId as string | undefined;
 
-  if (!tenantId || !userId) {
+  if (!tenantId || !userId || !personId) {
     return null;
   }
 
-  return { tenantId, userId };
+  return { tenantId, userId, personId };
 }
 
 /**
@@ -59,7 +60,7 @@ export const listTasks = tool(
   async (_input: Record<string, never>, runtime?: AgentToolRuntime) => {
     const ctx = getContextFromRuntime(runtime);
     if (!ctx) {
-      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+      return "Error: Agent context not configured. Ensure tenantId, userId, and personId are passed in context.";
     }
 
     try {
@@ -97,7 +98,7 @@ export const getTask = tool(
   async ({ id }, runtime?: AgentToolRuntime) => {
     const ctx = getContextFromRuntime(runtime);
     if (!ctx) {
-      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+      return "Error: Agent context not configured. Ensure tenantId, userId, and personId are passed in context.";
     }
 
     try {
@@ -137,7 +138,7 @@ export const searchTasks = tool(
   async ({ query }, runtime?: AgentToolRuntime) => {
     const ctx = getContextFromRuntime(runtime);
     if (!ctx) {
-      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+      return "Error: Agent context not configured. Ensure tenantId, userId, and personId are passed in context.";
     }
 
     try {
@@ -208,7 +209,7 @@ export const createTask = tool(
   async ({ title, description, status, label, priority }, runtime?: AgentToolRuntime) => {
     const ctx = getContextFromRuntime(runtime);
     if (!ctx) {
-      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+      return "Error: Agent context not configured. Ensure tenantId, userId, and personId are passed in context.";
     }
 
     try {
@@ -283,7 +284,7 @@ export const updateTask = tool(
   async ({ id, title, description, status, label, priority }, runtime?: AgentToolRuntime) => {
     const ctx = getContextFromRuntime(runtime);
     if (!ctx) {
-      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+      return "Error: Agent context not configured. Ensure tenantId, userId, and personId are passed in context.";
     }
 
     try {
@@ -332,7 +333,7 @@ export const deleteTask = tool(
   async ({ id }, runtime?: AgentToolRuntime) => {
     const ctx = getContextFromRuntime(runtime);
     if (!ctx) {
-      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+      return "Error: Agent context not configured. Ensure tenantId, userId, and personId are passed in context.";
     }
 
     try {
@@ -367,7 +368,7 @@ export const proposeTask = tool(
   async ({ title, description, status, label, priority }, runtime?: AgentToolRuntime) => {
     const ctx = getContextFromRuntime(runtime);
     if (!ctx) {
-      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+      return "Error: Agent context not configured. Ensure tenantId, userId, and personId are passed in context.";
     }
 
     const formId = crypto.randomUUID();
@@ -405,7 +406,7 @@ export const proposeTaskUpdate = tool(
   async ({ id, title, description, status, label, priority }, runtime?: AgentToolRuntime) => {
     const ctx = getContextFromRuntime(runtime);
     if (!ctx) {
-      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+      return "Error: Agent context not configured. Ensure tenantId, userId, and personId are passed in context.";
     }
 
     try {
@@ -459,7 +460,7 @@ export const proposeTaskDelete = tool(
   async ({ id }, runtime?: AgentToolRuntime) => {
     const ctx = getContextFromRuntime(runtime);
     if (!ctx) {
-      return "Error: Agent context not configured. Ensure tenantId and userId are passed in context.";
+      return "Error: Agent context not configured. Ensure tenantId, userId, and personId are passed in context.";
     }
 
     try {
