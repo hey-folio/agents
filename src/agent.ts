@@ -6,7 +6,7 @@ import { AIMessage, HumanMessage, ToolMessage, type BaseMessage } from "@langcha
 import { tasksAgent } from "./agents/tasksAgent.js";
 import { generalAgent } from "./agents/generalAgent.js";
 import { agentContextSchema } from "./context.js";
-import { defaultModel, suggestionModel } from "./lib/models.js";
+import { defaultModel, suggestionModel, titleModel } from "./lib/models.js";
 
 // Type alias for tool runtime with our context schema
 type AgentToolRuntime = ToolRuntime<unknown, typeof agentContextSchema>;
@@ -58,6 +58,60 @@ Guidelines:
       return { suggestions: result.suggestions };
     } catch {
       return { suggestions: [] };
+    }
+  },
+});
+
+/**
+ * Title Generation Middleware
+ *
+ * Automatically generates a descriptive title for new Folio conversations.
+ * Runs in the afterAgent hook on the first exchange (1 human message + AI response).
+ * Returns the title as part of state (same pattern as suggestions).
+ */
+const titleGenerationMiddleware = createMiddleware({
+  name: "TitleGenerator",
+  stateSchema: z.object({
+    title: z.string().optional(),
+  }),
+  afterAgent: async (state: { messages: BaseMessage[] }) => {
+    try {
+      // Only run on first exchange (user message + assistant response)
+      const humanMessages = state.messages.filter(HumanMessage.isInstance);
+      const aiMessages = state.messages.filter(AIMessage.isInstance);
+
+      // Only generate title on first user message getting first response
+      if (humanMessages.length !== 1 || aiMessages.length === 0) {
+        return {};
+      }
+
+      // Extract the first user message content
+      const firstMessage = humanMessages[0];
+      const userContent = typeof firstMessage.content === "string"
+        ? firstMessage.content
+        : JSON.stringify(firstMessage.content);
+
+      // Generate title from the first message
+      const result = await titleModel.invoke(
+        `Generate a short, descriptive title (3-6 words) for a conversation that starts with this message:
+
+"${userContent.slice(0, 500)}"
+
+Guidelines:
+- Title should describe the topic or intent
+- Keep it concise and professional
+- Do NOT use quotes or special characters
+- Do NOT include "Chat about" or similar prefixes
+- Examples: "Marketing Strategy Review", "Bug Fix for Login", "Weekend Trip Planning"`
+      );
+
+      console.log(`[TitleGenerator] Generated title: ${result.title}`);
+
+      // Return title as state (frontend will update channel name)
+      return { title: result.title };
+    } catch (error) {
+      console.error("[TitleGenerator] Error:", error);
+      return {};
     }
   },
 });
@@ -134,10 +188,11 @@ const manageTasks = tool(
     const configurable = runtime?.config?.configurable as Record<string, unknown> | undefined;
     const tenantId = configurable?.tenantId as string | undefined;
     const userId = configurable?.userId as string | undefined;
+    const personId = configurable?.personId as string | undefined;
 
-    if (!tenantId || !userId) {
+    if (!tenantId || !userId || !personId) {
       return JSON.stringify({
-        result: "Error: Agent context not configured. Please ensure tenantId and userId are passed.",
+        result: "Error: Agent context not configured. Please ensure tenantId, userId, and personId are passed.",
         subagentMessages: [],
       });
     }
@@ -163,7 +218,7 @@ ${request}
     // Invoke tasks agent with enriched request that includes known task IDs
     const result = await tasksAgent.invoke(
       { messages: [{ role: "user", content: enrichedRequest }] },
-      { configurable: { tenantId, userId } }
+      { configurable: { tenantId, userId, personId } }
     );
 
     // Extract the last message content from the agent's response
@@ -274,7 +329,7 @@ export const agent: ReturnType<typeof createAgent> = createAgent({
   model: defaultModel,
   tools: [manageTasks, handleGeneral],
   checkpointer,
-  middleware: [suggestionMiddleware],
+  middleware: [suggestionMiddleware, titleGenerationMiddleware],
   systemPrompt: `You are a helpful supervisor assistant that routes user requests to specialized agents.
 
 You have two capabilities:
