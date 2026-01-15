@@ -28,3 +28,18 @@ export const suggestionModel = new ChatOpenAI({
   model: MODEL_NAME,
   maxTokens: 200,
 }).withStructuredOutput(SuggestionsSchema);
+
+// Schema for structured title output
+const TitleSchema = z.object({
+  title: z
+    .string()
+    .min(3)
+    .max(50)
+    .describe("A short, descriptive title (3-6 words) for the conversation"),
+});
+
+// Pre-configured model instance for structured output (chat title generation)
+export const titleModel = new ChatOpenAI({
+  model: MODEL_NAME,
+  maxTokens: 50,
+}).withStructuredOutput(TitleSchema);

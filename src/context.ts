@@ -14,6 +14,7 @@ import { z } from "zod";
 export const agentContextSchema = z.object({
   tenantId: z.string().describe("The tenant ID for multi-tenant isolation"),
   userId: z.string().describe("The user ID making the request"),
+  personId: z.string().describe("The person ID for people features"),
 });
 
 export type AgentContext = z.infer<typeof agentContextSchema>;

@@ -3,5 +3,11 @@
   "graphs": {
     "agent": "./src/agent.ts:agent"
   },
-  "env": ".env"
+  "env": ".env",
+  "webhooks": {
+    "url": {
+      "allowed_domains": ["*.heyfolio.ai", "*.convex.site"],
+      "require_https": true
+    }
+  }
 }
