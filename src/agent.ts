@@ -11,6 +11,9 @@ import { defaultModel, suggestionModel, titleModel } from "./lib/models.js";
 // Type alias for tool runtime with our context schema
 type AgentToolRuntime = ToolRuntime<unknown, typeof agentContextSchema>;
 
+// Prevent middleware LLM calls from emitting tool-call/tool-result messages into the main stream.
+const SILENT_MODEL_CONFIG = { callbacks: [] };
+
 // Checkpointer for state persistence (required by LangSmith Studio)
 const checkpointer = new MemorySaver();
 
@@ -52,7 +55,8 @@ Guidelines:
 - Make them relevant to what was discussed
 - For task discussions: suggest task actions ("Show my tasks", "Mark it as done")
 - For general topics: suggest related questions
-- Never repeat what the user already asked`
+- Never repeat what the user already asked`,
+        SILENT_MODEL_CONFIG
       );
 
       return { suggestions: result.suggestions };
@@ -102,7 +106,8 @@ Guidelines:
 - Keep it concise and professional
 - Do NOT use quotes or special characters
 - Do NOT include "Chat about" or similar prefixes
-- Examples: "Marketing Strategy Review", "Bug Fix for Login", "Weekend Trip Planning"`
+- Examples: "Marketing Strategy Review", "Bug Fix for Login", "Weekend Trip Planning"`,
+        SILENT_MODEL_CONFIG
       );
 
       console.log(`[TitleGenerator] Generated title: ${result.title}`);
